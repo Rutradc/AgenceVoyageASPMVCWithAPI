@@ -1,4 +1,4 @@
-﻿namespace AppAgency.Domain.Model
+﻿namespace AppAgency.ASP.Entities
 {
     public class Activity
     {
@@ -7,7 +7,6 @@
         public string Description { get; set; } = string.Empty;
         public decimal Price { get; set; }
 
-        public int DestinationId { get; set; }
         public Destination Destination { get; set; }
         public ICollection<Booking> Bookings { get; set; } = new List<Booking>();
     }

@@ -4,6 +4,7 @@ using AppAgency.DAL;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 #nullable disable
@@ -11,9 +12,11 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace AppAgency.DAL.Migrations
 {
     [DbContext(typeof(AgenceDbContext))]
-    partial class AgenceDbContextModelSnapshot : ModelSnapshot
+    [Migration("20251217144538_init")]
+    partial class init
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -194,7 +197,7 @@ namespace AppAgency.DAL.Migrations
                     b.HasKey("Id")
                         .HasName("PK_Destination");
 
-                    b.HasIndex("City")
+                    b.HasIndex("Country")
                         .IsUnique();
 
                     b.ToTable("Destinations", (string)null);

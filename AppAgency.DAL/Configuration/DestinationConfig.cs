@@ -15,12 +15,9 @@ namespace AppAgency.DAL.Configuration
             builder.Property(d => d.City).IsRequired().HasMaxLength(100);
             builder.Property(d => d.Description).IsRequired().HasMaxLength(255);
 
-            // constrains
+            // constraints
             builder.HasKey(d => d.Id).HasName("PK_Destination");
-            builder.HasIndex(d => d.Country).IsUnique();
-
-            
-           
+            builder.HasIndex(d => d.City).IsUnique();
         }
     }
 }

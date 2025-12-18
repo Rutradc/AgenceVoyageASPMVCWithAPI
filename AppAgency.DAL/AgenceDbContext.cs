@@ -10,10 +10,9 @@ namespace AppAgency.DAL
         public DbSet<Destination> Destinations {  get; set; }
         public DbSet<Activity> Activities {  get; set; }
         public DbSet<Booking> Bookings {  get; set; }
-        
-        protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
+        public AgenceDbContext(DbContextOptions<AgenceDbContext> options)
+        : base(options)
         {
-            optionsBuilder.UseSqlServer("Data Source=BSTORM-PHIL\\DATAVIZ;database=Exo_EF_Agence;Integrated Security=True;Connect Timeout=60;Encrypt=True;Trust Server Certificate=True;Application Intent=ReadWrite;Multi Subnet Failover=False");
         }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)

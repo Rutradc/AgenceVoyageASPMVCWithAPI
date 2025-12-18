@@ -12,8 +12,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace AppAgency.DAL.Migrations
 {
     [DbContext(typeof(AgenceDbContext))]
-    [Migration("20251124160452_init")]
-    partial class init
+    [Migration("20251218080812_changedUniqueConstraint")]
+    partial class changedUniqueConstraint
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -197,7 +197,7 @@ namespace AppAgency.DAL.Migrations
                     b.HasKey("Id")
                         .HasName("PK_Destination");
 
-                    b.HasIndex("Country")
+                    b.HasIndex("City")
                         .IsUnique();
 
                     b.ToTable("Destinations", (string)null);
