@@ -1,0 +1,15 @@
+﻿@model DisplayDestination
+@{
+    ViewData["Title"] = "Détails Destination";
+}
+
+<h2>@Model.Country - @Model.City</h2>
+<p>@Model.Description</p>
+
+<h3>Activités disponibles</h3>
+<ul>
+    @foreach(DisplayActivity activity in Model.Activities)
+    {
+        <li>@activity.Title - @activity.Price.ToString("C") EUR</li>
+    }
+</ul>

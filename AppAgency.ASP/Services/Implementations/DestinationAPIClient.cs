@@ -22,6 +22,13 @@ namespace AppAgency.ASP.Services.Implementations
             return await response.Content.ReadFromJsonAsync<IEnumerable<Destination>>();
         }
 
+        public async Task<Destination> GetById(int id)
+        {
+            HttpResponseMessage response = await _http.GetAsync(_defaultRoute + id);
+            response.EnsureSuccessStatusCode();
+            return await response.Content.ReadFromJsonAsync<Destination>();
+        }
+
         public async Task<Destination> Insert(CreateDestinationForm destination)
         {
             HttpResponseMessage response = await _http.PostAsJsonAsync(_defaultRoute, destination);

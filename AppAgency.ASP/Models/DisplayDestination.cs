@@ -13,17 +13,15 @@ namespace AppAgency.ASP.Models
         public string City { get; set; }
         [DisplayName("Description")]
         public string Description { get; set; }
-        public ICollection<Activity> Activities { get; set; } = new List<Activity>();
-        public ICollection<Booking> Bookings { get; set; } = new List<Booking>();
+        public IEnumerable<DisplayActivity> Activities { get; set; } = new List<DisplayActivity>();
 
-        public DisplayDestination(int id, string country, string city, string description, ICollection<Activity> activities, ICollection<Booking> bookings)
+        public DisplayDestination(int id, string country, string city, string description, IEnumerable<DisplayActivity> activities)
         {
             Id = id;
             Country = country;
             City = city;
             Description = description;
             Activities = activities;
-            Bookings = bookings;
         }
     }
 }

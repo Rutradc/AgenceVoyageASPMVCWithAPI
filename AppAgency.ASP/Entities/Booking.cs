@@ -6,7 +6,7 @@
         public DateTime BookingDate { get; set; }
         public required string ClientName { get; set; }
 
-        public int ActivityId { get; set; }
-        public Activity Activity { get; set; }
+        public IEnumerable<Activity> Activities { get; set; } = new List<Activity>();
+        public Destination Destination { get; set; }
     }
 }

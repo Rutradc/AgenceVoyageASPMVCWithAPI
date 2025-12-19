@@ -25,7 +25,7 @@ namespace AppAgency.DAL.Migrations
                 constraints: table =>
                 {
                     table.PrimaryKey("PK_Booking", x => x.Id);
-                    table.CheckConstraint("CK_Bookind_Date", "[BookingDate] >= GetDate()");
+                    table.CheckConstraint("CK_Booking_Date", "[BookingDate] >= GetDate()");
                 });
 
             migrationBuilder.CreateTable(
@@ -51,7 +51,7 @@ namespace AppAgency.DAL.Migrations
                         .Annotation("SqlServer:Identity", "1, 1"),
                     Title = table.Column<string>(type: "nvarchar(150)", maxLength: 150, nullable: false),
                     Description = table.Column<string>(type: "nvarchar(200)", maxLength: 200, nullable: false),
-                    Price = table.Column<decimal>(type: "decimal(18,0)", nullable: false),
+                    Price = table.Column<decimal>(type: "decimal(10,2)", nullable: false),
                     DestinationId = table.Column<int>(type: "int", nullable: false)
                 },
                 constraints: table =>
@@ -105,8 +105,10 @@ namespace AppAgency.DAL.Migrations
                 columns: new[] { "Id", "City", "Country", "Description" },
                 values: new object[,]
                 {
-                    { 1, "Bruxelles", "Belgique", "Découvrez le plat pays a travers nos activité" },
-                    { 2, "Paris", "France", "Voyagez a travers nos régions..." }
+                    { 1, "Bruxelles", "Belgique", "Washington d'Europe" },
+                    { 2, "Paris", "France", "Ville lumière" },
+                    { 3, "Barcelone", "Espagne", "Ville de Gaudi" },
+                    { 4, "Londres", "Royaume-Uni", "Ville-monde" }
                 });
 
             migrationBuilder.InsertData(
@@ -142,9 +144,9 @@ namespace AppAgency.DAL.Migrations
                 column: "ActivityId");
 
             migrationBuilder.CreateIndex(
-                name: "IX_Destinations_City",
+                name: "IX_Destinations_City_Country",
                 table: "Destinations",
-                column: "City",
+                columns: new[] { "City", "Country" },
                 unique: true);
         }
 

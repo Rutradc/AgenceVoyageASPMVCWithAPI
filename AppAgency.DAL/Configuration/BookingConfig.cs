@@ -17,7 +17,7 @@ namespace AppAgency.DAL.Configuration
 
             //constrains
             builder.HasKey(b => b.Id).HasName("PK_Booking");
-            builder.ToTable(b => b.HasCheckConstraint("CK_Bookind_Date","[BookingDate] >= GetDate()"));
+            builder.ToTable(b => b.HasCheckConstraint("CK_Booking_Date","[BookingDate] >= GetDate()"));
 
             // relations
             // booking<>activity

@@ -12,7 +12,7 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace AppAgency.DAL.Migrations
 {
     [DbContext(typeof(AgenceDbContext))]
-    [Migration("20251219102858_init")]
+    [Migration("20251219150445_init")]
     partial class init
     {
         /// <inheritdoc />
@@ -84,7 +84,7 @@ namespace AppAgency.DAL.Migrations
                         .HasColumnType("int");
 
                     b.Property<decimal>("Price")
-                        .HasColumnType("decimal");
+                        .HasColumnType("decimal(10,2)");
 
                     b.Property<string>("Title")
                         .IsRequired()
@@ -149,7 +149,7 @@ namespace AppAgency.DAL.Migrations
 
                     b.ToTable("Bookings", null, t =>
                         {
-                            t.HasCheckConstraint("CK_Bookind_Date", "[BookingDate] >= GetDate()");
+                            t.HasCheckConstraint("CK_Booking_Date", "[BookingDate] >= GetDate()");
                         });
 
                     b.HasData(
@@ -199,7 +199,7 @@ namespace AppAgency.DAL.Migrations
                     b.HasKey("Id")
                         .HasName("PK_Destination");
 
-                    b.HasIndex("City")
+                    b.HasIndex("City", "Country")
                         .IsUnique();
 
                     b.ToTable("Destinations", (string)null);
@@ -210,14 +210,28 @@ namespace AppAgency.DAL.Migrations
                             Id = 1,
                             City = "Bruxelles",
                             Country = "Belgique",
-                            Description = "Découvrez le plat pays a travers nos activité"
+                            Description = "Washington d'Europe"
                         },
                         new
                         {
                             Id = 2,
                             City = "Paris",
                             Country = "France",
-                            Description = "Voyagez a travers nos régions..."
+                            Description = "Ville lumière"
+                        },
+                        new
+                        {
+                            Id = 3,
+                            City = "Barcelone",
+                            Country = "Espagne",
+                            Description = "Ville de Gaudi"
+                        },
+                        new
+                        {
+                            Id = 4,
+                            City = "Londres",
+                            Country = "Royaume-Uni",
+                            Description = "Ville-monde"
                         });
                 });
 

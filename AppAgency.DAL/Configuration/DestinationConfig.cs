@@ -17,7 +17,7 @@ namespace AppAgency.DAL.Configuration
 
             // constraints
             builder.HasKey(d => d.Id).HasName("PK_Destination");
-            builder.HasIndex(d => d.City).IsUnique();
+            builder.HasIndex(d => new { d.City, d.Country }).IsUnique();
         }
     }
 }

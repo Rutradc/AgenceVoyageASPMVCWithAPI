@@ -11,7 +11,7 @@
     <div class="card">
         <h3>@destination.Country - @destination.City</h3>
         <p>@destination.Description</p>
-        <a asp-action="Details" asp-controller="Destination">Voir détails</a>
+        <a asp-action="Details" asp-controller="Destination" asp-route-id="@destination.Id">Voir détails</a>
     </div>    
 }
 

@@ -8,7 +8,7 @@ namespace AppAgency.ASP
         public static void Main(string[] args)
         {
             var builder = WebApplication.CreateBuilder(args);
-            IConfiguration config = builder.Configuration;
+            //IConfiguration config = builder.Configuration;
 
             //string baseAPIUrl = config.GetValue("BaseUrl", "");
 
@@ -16,8 +16,10 @@ namespace AppAgency.ASP
             builder.Services.AddControllersWithViews();
             // Add httpClients with API Url
             builder.Services.AddHttpClient<DestinationAPIClient>();
+            builder.Services.AddHttpClient<ActivityAPIClient>();
             // config httpClients
             builder.Services.AddScoped<IDestinationService, DestinationAPIClient>();
+            builder.Services.AddScoped<IActivityService, ActivityAPIClient>();
 
             var app = builder.Build();
 

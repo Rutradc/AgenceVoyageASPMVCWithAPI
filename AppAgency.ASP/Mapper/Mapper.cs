@@ -12,8 +12,16 @@ namespace AppAgency.ASP.Mapper
                 entity.Country,
                 entity.City,
                 entity.Description,
-                entity.Activities,
-                entity.Bookings
+                entity.Activities.Select(a => a.ToDisplayActivity())
+                );
+        }
+        public static DisplayActivity ToDisplayActivity(this Activity entity)
+        {
+            return new DisplayActivity(
+                entity.Id,
+                entity.Title,
+                entity.Description,
+                entity.Price
                 );
         }
     }

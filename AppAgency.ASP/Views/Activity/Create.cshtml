@@ -1,0 +1,26 @@
+﻿@model CreateActivityForm
+@{
+    ViewData["Title"] = "Ajouter une activité";
+}
+
+<h2>Ajouter une activité</h2>
+
+<form asp-action="Create">
+    <label for="Title">Nom de l'activité</label>
+    <input asp-for="Title"/>
+    <span asp-validation-for="Title"></span>
+
+    <label for="Description">Description</label>
+    <textarea asp-for="Description"></textarea>
+    <span asp-validation-for="Description"></span>
+
+    <label for="Price">Prix (EUR)</label>
+    <input asp-for="Price" type="number" step="0.01" placeholder="50.00" />
+    <span asp-validation-for="Price"></span>
+
+    <label for="DestinationId">ID de la destination</label>
+    <input asp-for="DestinationId" placeholder="1" />
+    <span asp-validation-for="DestinationId"></span>
+
+    <button type="submit" value="Create">Ajouter</button>
+</form>

@@ -12,7 +12,7 @@ namespace AppAgency.DAL.Configuration
 
             builder.Property(a => a.Id).ValueGeneratedOnAdd();
             builder.Property(a => a.Title).HasMaxLength(150).IsRequired();
-            builder.Property(a => a.Price).HasColumnType("decimal").IsRequired();
+            builder.Property(a => a.Price).HasColumnType("decimal(10,2)").IsRequired();
             builder.Property(a => a.Description).HasMaxLength(200).IsRequired();
 
             //constrains
