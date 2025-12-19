@@ -27,5 +27,15 @@ namespace AppAgency.API.Handlers
                 DestinationId = dto.DestinationId,
             };
         }
+
+        public static Booking ToEntity(this BookingCreateDto dto)
+        {
+            if (dto is null) throw new ArgumentNullException(nameof(dto));
+            return new Booking()
+            {
+                BookingDate = dto.BookingDate,
+                ClientName = dto.ClientName
+            };
+        }
     }
 }

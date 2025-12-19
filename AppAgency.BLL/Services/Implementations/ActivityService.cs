@@ -13,7 +13,7 @@ namespace AppAgency.BLL.Services.Implementations
             _repo = repo;
         }
 
-        public Activity Insert(Activity activity)
+        public Activity Create(Activity activity)
         {
             return _repo.Insert(activity);
         }

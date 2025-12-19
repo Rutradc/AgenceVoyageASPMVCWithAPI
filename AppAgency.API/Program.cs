@@ -23,9 +23,11 @@ namespace AppAgency.API
             //config services DAL
             builder.Services.AddScoped<IDestinationRepo, SqlDestinationRepo>();
             builder.Services.AddScoped<IActivityRepo, SqlActivityRepo>();
+            builder.Services.AddScoped<IBookingRepo, SqlBookingRepo>();
             //config services BLL
             builder.Services.AddScoped<IDestinationService, DestinationService>();
             builder.Services.AddScoped<IActivityService, ActivityService>();
+            builder.Services.AddScoped<IBookingService, BookingService>();
 
             builder.Services.AddControllers();
             // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle

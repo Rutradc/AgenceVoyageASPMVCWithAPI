@@ -51,6 +51,16 @@ namespace AppAgency.DAL.Migrations
                         {
                             BookId = 2,
                             ActivityId = 3
+                        },
+                        new
+                        {
+                            BookId = 3,
+                            ActivityId = 1
+                        },
+                        new
+                        {
+                            BookId = 3,
+                            ActivityId = 2
                         });
                 });
 
@@ -131,13 +141,8 @@ namespace AppAgency.DAL.Migrations
                         .HasMaxLength(70)
                         .HasColumnType("nvarchar(70)");
 
-                    b.Property<int>("DestinationId")
-                        .HasColumnType("int");
-
                     b.HasKey("Id")
                         .HasName("PK_Booking");
-
-                    b.HasIndex("DestinationId");
 
                     b.ToTable("Bookings", null, t =>
                         {
@@ -149,22 +154,19 @@ namespace AppAgency.DAL.Migrations
                         {
                             Id = 1,
                             BookingDate = new DateTime(2026, 5, 10, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            ClientName = "Bill Cypher",
-                            DestinationId = 1
+                            ClientName = "Bill Cypher"
                         },
                         new
                         {
                             Id = 2,
                             BookingDate = new DateTime(2026, 5, 11, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            ClientName = "Dipper Pines",
-                            DestinationId = 2
+                            ClientName = "Dipper Pines"
                         },
                         new
                         {
                             Id = 3,
                             BookingDate = new DateTime(2026, 1, 20, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            ClientName = "Mabel Pines",
-                            DestinationId = 1
+                            ClientName = "Mabel Pines"
                         });
                 });
 
@@ -242,22 +244,9 @@ namespace AppAgency.DAL.Migrations
                     b.Navigation("Destination");
                 });
 
-            modelBuilder.Entity("AppAgency.Domain.Model.Booking", b =>
-                {
-                    b.HasOne("AppAgency.Domain.Model.Destination", "Destination")
-                        .WithMany("Bookings")
-                        .HasForeignKey("DestinationId")
-                        .OnDelete(DeleteBehavior.Restrict)
-                        .IsRequired();
-
-                    b.Navigation("Destination");
-                });
-
             modelBuilder.Entity("AppAgency.Domain.Model.Destination", b =>
                 {
                     b.Navigation("Activities");
-
-                    b.Navigation("Bookings");
                 });
 #pragma warning restore 612, 618
         }

@@ -8,6 +8,6 @@
         public required string Description { get; set; }
 
         public ICollection<Activity> Activities { get; set; } = new List<Activity>();
-        public ICollection<Booking> Bookings { get; set; } = new List<Booking>();
+        //public IEnumerable<Booking> Bookings { get => Activities.SelectMany(a => a.Bookings); }
     }
 }

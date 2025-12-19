@@ -13,19 +13,13 @@ namespace AppAgency.DAL.Configuration
             builder.Property(b => b.Id).ValueGeneratedOnAdd();
             builder.Property(b => b.BookingDate).IsRequired().HasColumnType("date");
             builder.Property(b => b.ClientName).IsRequired().HasMaxLength(70);
+            builder.Ignore(b => b.Destination);
 
             //constrains
             builder.HasKey(b => b.Id).HasName("PK_Booking");
             builder.ToTable(b => b.HasCheckConstraint("CK_Bookind_Date","[BookingDate] >= GetDate()"));
 
             // relations
-            // booking<>destination
-            builder.HasOne(b => b.Destination)
-                .WithMany(d => d.Bookings)
-                .HasForeignKey("DestinationId")
-                .OnDelete(DeleteBehavior.Restrict)
-                .IsRequired();
-
             // booking<>activity
             builder.HasMany(b => b.Activities)
                 .WithMany(a => a.Bookings)
@@ -38,11 +32,8 @@ namespace AppAgency.DAL.Configuration
                      right => right.HasOne(typeof(Booking))
                              .WithMany()
                              .HasForeignKey("BookId")
-                             .HasPrincipalKey(nameof(Booking.Id)), 
-                     join => join.HasKey("BookId","ActivityId"));
-
-          
-           
+                             .HasPrincipalKey(nameof(Booking.Id)),
+                     join => join.HasKey("BookId", "ActivityId"));
         }
     }
 

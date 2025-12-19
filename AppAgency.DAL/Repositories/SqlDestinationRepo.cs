@@ -16,16 +16,7 @@ namespace AppAgency.DAL.Repositories
         public Destination Get(int id) 
         {
             return _dbContext.Destinations
-                .Select(d => new Destination() 
-                {
-                    Id = d.Id,
-                    Country = d.Country,
-                    City = d.City,
-                    Description = d.Description,
-                    Activities =
-                        _dbContext.Activities
-                        .Where(a => a.Destination.Id == d.Id).ToList()
-                })
+                .Include(d => d.Activities)
                 .FirstOrDefault(d => d.Id == id);
         }
 

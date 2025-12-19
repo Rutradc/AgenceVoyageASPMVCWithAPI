@@ -4,6 +4,6 @@ namespace AppAgency.BLL.Services.Interfaces
 {
     public interface IActivityService
     {
-        Activity Insert(Activity activity);
+        Activity Create(Activity activity);
     }
 }

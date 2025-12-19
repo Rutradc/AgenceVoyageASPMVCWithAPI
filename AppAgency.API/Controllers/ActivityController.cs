@@ -18,7 +18,7 @@ namespace AppAgency.API.Controllers
         [HttpPost]
         public IActionResult Create([FromBody] ActivityCreateDto dto)
         {
-            var created = _service.Insert(dto.ToEntity());
+            var created = _service.Create(dto.ToEntity());
             return CreatedAtAction(nameof(Create), new { id = created.Id }, created);
         }
     }

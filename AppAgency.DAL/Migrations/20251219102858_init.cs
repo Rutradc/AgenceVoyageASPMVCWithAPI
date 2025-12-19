@@ -14,6 +14,21 @@ namespace AppAgency.DAL.Migrations
         protected override void Up(MigrationBuilder migrationBuilder)
         {
             migrationBuilder.CreateTable(
+                name: "Bookings",
+                columns: table => new
+                {
+                    Id = table.Column<int>(type: "int", nullable: false)
+                        .Annotation("SqlServer:Identity", "1, 1"),
+                    BookingDate = table.Column<DateTime>(type: "date", nullable: false),
+                    ClientName = table.Column<string>(type: "nvarchar(70)", maxLength: 70, nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_Booking", x => x.Id);
+                    table.CheckConstraint("CK_Bookind_Date", "[BookingDate] >= GetDate()");
+                });
+
+            migrationBuilder.CreateTable(
                 name: "Destinations",
                 columns: table => new
                 {
@@ -52,28 +67,6 @@ namespace AppAgency.DAL.Migrations
                 });
 
             migrationBuilder.CreateTable(
-                name: "Bookings",
-                columns: table => new
-                {
-                    Id = table.Column<int>(type: "int", nullable: false)
-                        .Annotation("SqlServer:Identity", "1, 1"),
-                    BookingDate = table.Column<DateTime>(type: "date", nullable: false),
-                    ClientName = table.Column<string>(type: "nvarchar(70)", maxLength: 70, nullable: false),
-                    DestinationId = table.Column<int>(type: "int", nullable: false)
-                },
-                constraints: table =>
-                {
-                    table.PrimaryKey("PK_Booking", x => x.Id);
-                    table.CheckConstraint("CK_Bookind_Date", "[BookingDate] >= GetDate()");
-                    table.ForeignKey(
-                        name: "FK_Bookings_Destinations_DestinationId",
-                        column: x => x.DestinationId,
-                        principalTable: "Destinations",
-                        principalColumn: "Id",
-                        onDelete: ReferentialAction.Restrict);
-                });
-
-            migrationBuilder.CreateTable(
                 name: "ActivityBooked",
                 columns: table => new
                 {
@@ -98,6 +91,16 @@ namespace AppAgency.DAL.Migrations
                 });
 
             migrationBuilder.InsertData(
+                table: "Bookings",
+                columns: new[] { "Id", "BookingDate", "ClientName" },
+                values: new object[,]
+                {
+                    { 1, new DateTime(2026, 5, 10, 0, 0, 0, 0, DateTimeKind.Unspecified), "Bill Cypher" },
+                    { 2, new DateTime(2026, 5, 11, 0, 0, 0, 0, DateTimeKind.Unspecified), "Dipper Pines" },
+                    { 3, new DateTime(2026, 1, 20, 0, 0, 0, 0, DateTimeKind.Unspecified), "Mabel Pines" }
+                });
+
+            migrationBuilder.InsertData(
                 table: "Destinations",
                 columns: new[] { "Id", "City", "Country", "Description" },
                 values: new object[,]
@@ -117,23 +120,15 @@ namespace AppAgency.DAL.Migrations
                 });
 
             migrationBuilder.InsertData(
-                table: "Bookings",
-                columns: new[] { "Id", "BookingDate", "ClientName", "DestinationId" },
-                values: new object[,]
-                {
-                    { 1, new DateTime(2026, 5, 10, 0, 0, 0, 0, DateTimeKind.Unspecified), "Bill Cypher", 1 },
-                    { 2, new DateTime(2026, 5, 11, 0, 0, 0, 0, DateTimeKind.Unspecified), "Dipper Pines", 2 },
-                    { 3, new DateTime(2026, 1, 20, 0, 0, 0, 0, DateTimeKind.Unspecified), "Mabel Pines", 1 }
-                });
-
-            migrationBuilder.InsertData(
                 table: "ActivityBooked",
                 columns: new[] { "ActivityId", "BookId" },
                 values: new object[,]
                 {
                     { 1, 1 },
                     { 2, 1 },
-                    { 3, 2 }
+                    { 3, 2 },
+                    { 1, 3 },
+                    { 2, 3 }
                 });
 
             migrationBuilder.CreateIndex(
@@ -147,14 +142,9 @@ namespace AppAgency.DAL.Migrations
                 column: "ActivityId");
 
             migrationBuilder.CreateIndex(
-                name: "IX_Bookings_DestinationId",
-                table: "Bookings",
-                column: "DestinationId");
-
-            migrationBuilder.CreateIndex(
-                name: "IX_Destinations_Country",
+                name: "IX_Destinations_City",
                 table: "Destinations",
-                column: "Country",
+                column: "City",
                 unique: true);
         }
 

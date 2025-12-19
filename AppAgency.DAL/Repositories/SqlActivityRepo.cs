@@ -23,6 +23,7 @@ namespace AppAgency.DAL.Repositories
             }
             catch (Exception ex)
             {
+                Console.WriteLine(ex.Message + "au repo");
                 throw ex;
             }
         }

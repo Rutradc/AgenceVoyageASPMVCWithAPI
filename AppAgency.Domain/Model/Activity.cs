@@ -1,4 +1,6 @@
-﻿namespace AppAgency.Domain.Model
+﻿using System.Text.Json.Serialization;
+
+namespace AppAgency.Domain.Model
 {
     public class Activity
     {
@@ -8,7 +10,9 @@
         public decimal Price { get; set; }
 
         public int DestinationId { get; set; }
+        [JsonIgnore]
         public Destination Destination { get; set; }
+        [JsonIgnore]
         public ICollection<Booking> Bookings { get; set; } = new List<Booking>();
     }
 }

@@ -26,12 +26,13 @@ namespace AppAgency.DAL
             modelBuilder.ApplyConfiguration(new BookingConfig());
             modelBuilder.ApplyConfiguration(new BookingSeed());
 
-
             modelBuilder.Entity("ActivityBooked")
                 .HasData(
                     new { BookId = 1, ActivityId = 1 },
                     new { BookId = 1, ActivityId = 2 },
-                    new { BookId = 2, ActivityId = 3 }
+                    new { BookId = 2, ActivityId = 3 },
+                    new { BookId = 3, ActivityId = 1 },
+                    new { BookId = 3, ActivityId = 2 }
                  );
         }
 
