@@ -24,5 +24,10 @@ namespace AppAgency.API.Controllers
             var created = _bookingService.Create(dto.ToEntity(), dto.ActivitiesIds);
             return CreatedAtAction(nameof(Create), new { id = created.Id }, created);
         }
+        [HttpDelete("{id:int}")]
+        public void Delete(int id)
+        {
+            _bookingService.Delete(id);
+        }
     }
 }

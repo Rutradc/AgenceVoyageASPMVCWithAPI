@@ -1,0 +1,86 @@
+﻿@model CreateBookingForm
+@{
+    ViewData["Title"] = "Ajouter une réservation";
+}
+<h2>Faire une réservation</h2>
+
+<form asp-action="Create">
+    <label for="ClientName" >Nom du client</label>
+    <input asp-for="ClientName" />
+    <span asp-validation-for="ClientName" class="text-danger"></span>
+
+    <label for="BookingDate" >Date de réservation</label>
+    <input asp-for="BookingDate" />
+    <span asp-validation-for="BookingDate" class="text-danger"></span>
+
+    <label for="destSelect">Destination</label>
+    <select id="destSelect"></select>
+
+    <h3>Activités disponibles</h3>
+    <div id="actCheckBoxes">
+    </div>
+    <span asp-validation-for="ActivitiesIds" class="text-danger"></span>
+
+    <button type="submit" value="Create">Réserver</button>
+</form>
+<script>
+    const API_BASE = "https://localhost:7277/api/Destination/";
+
+    document.addEventListener("DOMContentLoaded", () => {
+        loadDestinations();
+    });
+
+    function loadDestinations() {
+        fetch(API_BASE)
+            .then(res => res.json())
+            .then(data => {
+                const destSelect = document.getElementById("destSelect");
+
+                data.forEach(dest => {
+                    const opt = document.createElement("option");
+                    opt.value = dest.id;
+                    opt.textContent = `${dest.city} (${dest.country})`;
+                    destSelect.appendChild(opt);
+                });
+
+                destSelect.addEventListener("change", loadActivities);
+                if (destSelect.value) {
+                    loadActivities({ target: destSelect });
+                }
+            });
+    }
+
+    function loadActivities(event) {
+        const destinationId = event.target.value;
+
+        fetch(API_BASE + destinationId)
+            .then(res => res.json())
+            .then(data => {
+                const actCheckBoxes = document.getElementById("actCheckBoxes");
+                if (data.activities === null || data.activities.length === 0)
+                    actCheckBoxes.innerHTML = "Aucune activité disponible";
+                else {
+                    actCheckBoxes.innerHTML = "";
+                    data.activities.forEach(activity => {
+                        const checkbox = document.createElement("input");
+                        checkbox.type = "checkbox";
+                        checkbox.name = "ActivitiesIds";
+                        checkbox.value = activity.id;
+                        checkbox.id = "activity_" + activity.id;
+
+                        const label = document.createElement("label");
+                        label.setAttribute("for", checkbox.id);
+                        label.textContent =
+                            `${activity.title} - ${activity.price.toFixed(2)} EUR`;
+
+                        const div = document.createElement("div");
+                        div.classList.add("actOption");
+                        div.appendChild(checkbox);
+                        div.appendChild(label);
+
+                        actCheckBoxes.appendChild(div);
+                    });
+                }
+            });
+    }
+</script>

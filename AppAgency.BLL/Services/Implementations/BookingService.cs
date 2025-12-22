@@ -18,6 +18,11 @@ namespace AppAgency.BLL.Services.Implementations
             return _repo.Insert(booking, activitiesIds);
         }
 
+        public bool Delete(int id)
+        {
+            return _repo.Delete(id);
+        }
+
         public IEnumerable<Booking> GetAll()
         {
             return _repo.GetAll();

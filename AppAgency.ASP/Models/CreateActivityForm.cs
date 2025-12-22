@@ -16,7 +16,7 @@ namespace AppAgency.ASP.Models
         [MaxLength(200, ErrorMessage = "La description a dépassé la limite de 200 caractères.")]
         public string Description { get; set; }
         [DisplayName("Prix")]
-        [DataType(DataType.Currency)]
+        [DataType(DataType.Currency, ErrorMessage = "Valeur non valide")]
         [Required(ErrorMessage = "Le prix est obligatoire !")]
         public decimal Price { get; set; }
         [DisplayName("Pays")]

@@ -1,0 +1,28 @@
+﻿@model IEnumerable<DisplayBooking>
+@{
+    ViewData["Title"] = "Réservations";
+}
+
+<h2>Liste des réservations</h2>
+
+@foreach(DisplayBooking booking in Model)
+{
+    <div class="card">
+        <h3>Réservation #@booking.Id</h3>
+        <p><strong>Client :</strong> @booking.ClientName</p>
+        <p><strong>Date :</strong> @booking.BookingDate</p>
+        <p><strong>Destination :</strong> @booking.Destination.City (@booking.Destination.Country)</p>
+
+        <h4>Activités réservées :</h4>
+        <ul>
+            @foreach(DisplayActivity activity in booking.Activities)
+            {
+                <li>@activity.Title - @activity.Price.ToString("C") EUR</li>
+            }
+        </ul>
+
+        <form asp-controller="Booking" asp-action="Delete" asp-route-id="@booking.Id" method="post" onsubmit="return confirm('Voulez-vous vraiment supprimer ?');">
+            <button type="submit">Annuler la réservation</button>
+        </form>
+    </div>
+}

@@ -6,5 +6,6 @@ namespace AppAgency.Domain.Repositories
     {
         IEnumerable<Booking> GetAll();
         Booking Insert(Booking booking, IEnumerable<int> activitiesIds);
+        bool Delete(int id);
     }
 }

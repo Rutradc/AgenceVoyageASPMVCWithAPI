@@ -51,5 +51,23 @@ namespace AppAgency.DAL.Repositories
             }
             return bookings;
         }
+
+        public bool Delete(int id)
+        {
+            try
+            {
+                Booking booking = _dbContext.Bookings.FirstOrDefault(b => b.Id == id);
+                if (booking == null)
+                    return false;
+                _dbContext.Bookings.Remove(booking);
+                _dbContext.SaveChanges();
+                return true;
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine(ex.Message);
+                return false;
+            }
+        }
     }
 }

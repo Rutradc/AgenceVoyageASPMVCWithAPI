@@ -34,6 +34,21 @@ namespace AppAgency.API
             builder.Services.AddEndpointsApiExplorer();
             builder.Services.AddSwaggerGen();
 
+            builder.Services.AddCors(opt =>
+            {
+                // Déclaration d'une policy CORS nommée "MvcCors"
+                opt.AddPolicy("MvcCors", p =>
+                {
+                    var origins = builder.Configuration
+                        .GetSection("Cors:AllowedOrigins")
+                        .Get<string[]>() ?? [];
+
+                    p.WithOrigins(origins)
+                     .AllowAnyHeader()
+                     .AllowAnyMethod();
+                    //.WithMethods("GET", "POST", "PUT");
+                });
+            });
             var app = builder.Build();
 
             // Configure the HTTP request pipeline.
@@ -44,6 +59,8 @@ namespace AppAgency.API
             }
 
             app.UseHttpsRedirection();
+
+            app.UseCors("MvcCors");
 
             app.UseAuthorization();
 

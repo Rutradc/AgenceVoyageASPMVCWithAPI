@@ -17,9 +17,11 @@ namespace AppAgency.ASP
             // Add httpClients with API Url
             builder.Services.AddHttpClient<DestinationAPIClient>();
             builder.Services.AddHttpClient<ActivityAPIClient>();
+            builder.Services.AddHttpClient<BookingAPIClient>();
             // config httpClients
             builder.Services.AddScoped<IDestinationService, DestinationAPIClient>();
             builder.Services.AddScoped<IActivityService, ActivityAPIClient>();
+            builder.Services.AddScoped<IBookingService, BookingAPIClient>();
 
             var app = builder.Build();
 
